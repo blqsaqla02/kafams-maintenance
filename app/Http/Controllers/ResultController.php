@@ -92,4 +92,3 @@ class ResultController extends Controller
                         ->with('success','Result deleted successfully');
     }
 }
-
