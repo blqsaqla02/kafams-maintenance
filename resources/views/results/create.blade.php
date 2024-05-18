@@ -30,13 +30,25 @@
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>Name:</strong>
-                <input type="text" name="student_name" class="form-control" placeholder="Name">
+                <input type="text" name="student_name" class="form-control" placeholder="student_name">
             </div>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>Class:</strong>
-                <textarea class="form-control" style="height:150px" name="student_class" placeholder="Class"></textarea>
+                <textarea class="form-control" style="height:150px" name="student_class" placeholder="student_class"></textarea>
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="form-group">
+                <strong>Type of assessment:</strong>
+                <textarea class="form-control" style="height:150px" name="assessment_type" placeholder="assessment_type"></textarea>
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="form-group">
+                <strong>Score:</strong>
+                <textarea class="form-control" style="height:150px" name="marks" placeholder="marks"></textarea>
             </div>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12 text-center">
