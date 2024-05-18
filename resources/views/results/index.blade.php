@@ -4,7 +4,7 @@
     <div class="row">
         <div class="col-lg-12 margin-tb">
             <div class="pull-left">
-                <h2>Laravel 10 CRUD Example from scratch - ItSolutionStuff.com</h2>
+                <h2>manage student result</h2>
             </div>
             <div class="pull-right">
                 <a class="btn btn-success" href="{{ route('results.create') }}"> Create New Result</a>
@@ -23,6 +23,8 @@
             <th>No</th>
             <th>Name</th>
             <th>Class</th>
+            <th>Type of assessment</th>
+            <th>Score</th>
             <th width="280px">Action</th>
         </tr>
         @foreach ($results as $result)
@@ -30,6 +32,8 @@
             <td>{{ ++$i }}</td>
             <td>{{ $result->student_name }}</td>
             <td>{{ $result->student_class }}</td>
+            <td>{{ $result->assessment_type }}</td>
+            <td>{{ $result->marks }}</td>
             <td>
                 <form action="{{ route('results.destroy',$result->id) }}" method="POST">
    
