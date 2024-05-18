@@ -1,4 +1,4 @@
-@extends('results.layout')
+@extends('layouts.main-layout')
   
 @section('content')
 <div class="row">
@@ -30,25 +30,25 @@
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>Name:</strong>
-                <input type="text" name="student_name" class="form-control" placeholder="student_name">
+                <input type="text" name="student_name" class="form-control" placeholder="Student's Full Name">
             </div>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>Class:</strong>
-                <textarea class="form-control" style="height:150px" name="student_class" placeholder="student_class"></textarea>
+                <textarea class="form-control" style="height:150px" name="student_class" placeholder="Student's Current Class"></textarea>
             </div>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>Type of assessment:</strong>
-                <textarea class="form-control" style="height:150px" name="assessment_type" placeholder="assessment_type"></textarea>
+                <textarea class="form-control" style="height:150px" name="assessment_type" placeholder="Subject & Assessment Type (example: Tauhid Ujian Pertengahan Tahun)"></textarea>
             </div>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>Score:</strong>
-                <textarea class="form-control" style="height:150px" name="marks" placeholder="marks"></textarea>
+                <textarea class="form-control" style="height:150px" name="marks" placeholder="Total Mark"></textarea>
             </div>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12 text-center">
