@@ -34,7 +34,8 @@ Route::delete('/bulletin/admin/delete/{id}', [BulletinController::class, 'destro
 
 Route::get('/profile', [profileController::class, 'index'])->name('profile.index');
 Route::get('/profile/create',[profileController::class, 'create'])->name('profile.create');
-Route::get('/store',[profileController::class, 'create'])->name('profile.create');
+// Route::get('/create',[profileController::class, 'create'])->name('profile.create');
+Route::get('/profile/view', [profileController::class, 'view'])->name('profile.view');
 Route::post('/store',[profileController::class, 'store'])->name('profile.store');
 //Route::delete('LabAsset/{assetDetail}', [profileController::class, 'destroy'])->name('assets.destroy');
 
