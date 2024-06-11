@@ -10,18 +10,18 @@
                 </div>
                     <div class="card-body px-0 pt-0 pb-2">
                         <div class="table-responsive p-0">
-                            <form method="post" action="" enctype="multipart/form-data">
+                            <form method="post" action="{{route('profile.store') }}" enctype="multipart/form-data">
                             @csrf
                             <div style="margin-bottom: 15px;margin-left: 50px">
                                 <label style="display: block; margin-bottom: 5px;">Name</label>
-                                <input type="text" name="name" placeholder="Name" style="width: 80%; padding: 4px;" />
+                                <input type="text" name="student_name" placeholder="Name" style="width: 80%; padding: 4px;" />
                             </div>
                             <div style="margin-bottom: 15px;margin-left: 50px">
                                 <label style="display: block; margin-bottom: 5px;">Gender</label>
                                     <select class="form-select" name="gender" id="gender" aria-label="Default select example" style="width: 80%;">
                                         <option selected>Select</option>
-                                        <option value="Chair">Male</option>
-                                        <option value="Desk">Female</option>
+                                        <option value="Male">Male</option>
+                                        <option value="Female">Female</option>
                                     </select>
                                 </div>
                             </div>
