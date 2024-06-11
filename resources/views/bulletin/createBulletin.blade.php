@@ -1,55 +1,72 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Your Page Title</title>
-    <!-- Bootstrap CSS -->
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <style>
-        .sidebar {
-            height: 100%;
-            width: 200px;
-            position: fixed;
-            top: 0;
-            left: 0;
-            background-color: #004d00; /* Dark green color */
-            padding-top: 20px;
-        }
-        .sidebar a {
-            padding: 10px 15px;
-            text-decoration: none;
-            font-size: 18px;
-            color: white;
-            display: block;
-        }
-        .sidebar a:hover {
-            color: #f1f1f1;
-        }
-        .content {
-            margin-left: 220px; /* Same as the width of the sidebar */
-            padding: 20px;
-        }
-    </style>
-</head>
-<body>
+@extends('layouts.main-layout')
 
-<div class="sidebar">
-    <a href="{{ route('home') }}">Home</a>
-    <a href="{{ route('profile.index') }}">Students Profile</a>
-    <a href="{{ route('activities.index') }}">KAFA activities</a>
-    <a href="{{ route('results.index') }}">Students Result</a>
-    <a href="{{ route('bulletin.index') }}">KAFA Bulletin</a>
+@section('content')
+<div class="row mb-4">
+    <div class="col-lg-12 margin-tb">
+        <div class="d-flex justify-content-between align-items-center">
+            <h2>Create Bulletin</h2>
+        </div>
+    </div>
 </div>
 
-<div class="content">
-    @yield('content')
-    create Bulletin
-</div>
+<style>
+    .form-control, .custom-file-label {
+        border: 2px solid black;
+        height: auto;
+    }
 
-<!-- Bootstrap JS and dependencies (jQuery and Popper.js) -->
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-</body>
-</html>
+    .card-header {
+        border-bottom: 2px solid black;
+    }
+    
+    .card {
+        border: 2px solid black;
+        border-radius: 10px;
+    }
+
+    .btn-primary {
+        width: 100px;
+    }
+</style>
+
+@if ($message = Session::get('success'))
+    <div class="alert alert-success">
+        <p>{{ $message }}</p>
+    </div>
+@endif
+
+<form action="{{ route('bulletin.store') }}" method="POST" enctype="multipart/form-data">
+    @csrf
+    <div class="card shadow-sm">
+        <div class="card-header">
+            <strong>Fill in the form</strong>
+        </div>
+        <div class="card-body">
+            <div class="form-group">
+                <label for="bulletin_title">Bulletin Title:</label>
+                <input type="text" name="bulletin_title" class="form-control" placeholder="Enter title">
+            </div>
+            <div class="form-group">
+                <label for="bulletin_image">Bulletin Image:</label>
+                <input style="height: auto;" type="file" name="bulletin_image" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="bulletin_desc">Description:</label>
+                <textarea name="bulletin_desc" class="form-control" placeholder="Enter description" rows="5"></textarea>
+            </div>
+            <div class="form-group">
+                <label for="bulletin_category">Category:</label>
+                <select name="bulletin_category" class="form-control">
+                    <option value="Events">Events</option>
+                    <option value="Announcement">Announcement</option>
+                    <option value="News">News</option>
+                </select>
+            </div>
+        </div>
+        <div class="card-footer d-flex justify-content-end">
+            <button type="submit" class="btn btn-primary mr-2">Create</button>
+            <a class="btn btn-secondary" href="{{ route('bulletin.indexBulletinAdmin') }}">Cancel</a>
+        </div>
+    </div>
+</form>
+@endsection
