@@ -6,7 +6,7 @@
             <div class="col-12">
                 <div class="card mb-4">
                 <div class="card-header d-flex justify-content-between pb-0">
-                    <h6> Student Registeration</h6>
+                    <h6> Edit form</h6>
                 </div>
                     <div class="card-body px-0 pt-0 pb-2">
                         <div class="table-responsive p-0">
@@ -30,15 +30,11 @@
                             <input type="text" name="parent_name" placeholder="Parent's Name" style="width: 80%; padding: 4px;" />
                             </div>
                             <div style="margin-bottom: 15px; margin-left: 50px">
-                                <label style="display: block; margin-bottom: 5px;">Parent's Name</label>
-                            <input type="text" name="address" placeholder="Parent's Name" style="width: 80%; padding: 4px;" />
-                            </div>
-                            <div style="margin-bottom: 15px; margin-left: 50px">
                                 <label style="display: block; margin-bottom: 5px;">Contact No</label>
                             <input type="text" name="contact_no" placeholder="Contact No" style="width: 80%; padding: 4px;" />
                             </div>
                             <div>
-                            <button type="submit" style="background-color: #007bff; color: #fff; padding: 10px 15px; border: none; cursor: pointer; border-radius: 5px;margin-left: 50px">Submit</button>   
+                            <button style="background-color: #007bff; color: #fff; padding: 10px 15px; border: none; cursor: pointer; border-radius: 5px;margin-left: 50px">Submit</button>   
                             <!--<input type="submit" value="Save details" style="background-color: #007bff; color: #fff; padding: 10px 15px; border: none; cursor: pointer; border-radius: 5px;margin-left: 50px" />
                               </div>-->
                             </form>
