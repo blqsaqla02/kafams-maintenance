@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,6 +12,7 @@
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
+
         .sidebar {
             height: 100%;
             width: 220px;
@@ -21,6 +23,7 @@
             padding-top: 20px;
             transition: width 0.3s;
         }
+
         .sidebar a {
             padding: 15px 20px;
             text-decoration: none;
@@ -29,48 +32,60 @@
             display: block;
             transition: background-color 0.3s, color 0.3s;
         }
+
         .sidebar a:hover {
             background-color: #006600;
             color: #f1f1f1;
         }
+
         .sidebar a.active {
             background-color: #005500;
             color: white;
         }
+
         .sidebar h2 {
             text-align: center;
             color: white;
             margin-bottom: 20px;
         }
+
         .content {
             margin-left: 240px;
             padding: 20px;
             background-color: #f9f9f9;
-            min-height: 100vh; /* Ensure content takes full height */
+            min-height: 100vh;
+            /* Ensure content takes full height */
         }
+
         .navbar {
             background-color: #004d00;
             color: white;
             padding: 10px 20px;
             margin-bottom: 20px;
         }
+
         .navbar h1 {
             margin: 0;
             font-size: 24px;
         }
+
         .container-fluid {
             padding: 0 15px;
         }
+
         .card {
             transition: transform 0.2s;
         }
+
         .card:hover {
             transform: scale(1.05);
         }
+
         .card img {
             max-height: 200px;
             object-fit: cover;
         }
+
         /* Responsive design */
         @media (max-width: 768px) {
             .sidebar {
@@ -78,13 +93,16 @@
                 height: auto;
                 position: relative;
             }
+
             .sidebar a {
                 float: left;
             }
+
             .content {
                 margin-left: 0;
             }
         }
+
         @media (max-width: 480px) {
             .sidebar a {
                 text-align: center;
@@ -93,27 +111,33 @@
         }
     </style>
 </head>
+
 <body>
 
-<div class="sidebar">
-    <h2>KAFAMS</h2>
-    <a href="{{ route('home') }}" class="{{ Request::routeIs('home') ? 'active' : '' }}">Home</a>
-    <a href="{{ route('profile.index') }}" class="{{ Request::routeIs('profile.index') ? 'active' : '' }}">Students Profile</a>
-    <a href="{{ route('activities.index') }}" class="{{ Request::routeIs('activities.index') ? 'active' : '' }}">KAFA Activities</a>
-    <a href="{{ route('results.index') }}" class="{{ Request::routeIs('results.index') ? 'active' : '' }}">Students Results</a>
-    <a href="{{ route('bulletin.indexBulletin') }}" class="{{ Request::routeIs('bulletin.indexBulletin') ? 'active' : '' }}">KAFA Bulletin</a>
-</div>
-
-<div class="content">
-    <div class="navbar">
-        <h1>KAFA Management System</h1>
+    <div class="sidebar">
+        <h2>KAFAMS ADMIN</h2>
+        <a href="{{ route('home') }}" class="{{ Request::routeIs('home') ? 'active' : '' }}">Home</a>
+        <a href="{{ route('profile.index') }}" class="{{ Request::routeIs('profile.index') ? 'active' : '' }}">Students
+            Profile</a>
+        <a href="{{ route('activities.index') }}"
+            class="{{ Request::routeIs('activities.index') ? 'active' : '' }}">KAFA Activities</a>
+        <a href="{{ route('results.index') }}" class="{{ Request::routeIs('results.index') ? 'active' : '' }}">Students
+            Results</a>
+        <a href="{{ route('bulletin.indexBulletinAdmin') }}"
+            class="{{ Request::routeIs('bulletin.indexBulletinAdmin') ? 'active' : '' }}">KAFA Bulletin</a>
     </div>
-    @yield('content')
-</div>
 
-<!-- Bootstrap JS and dependencies (jQuery and Popper.js) -->
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <div class="content">
+        <div class="navbar">
+            <h1>KAFA Management System</h1>
+        </div>
+        @yield('content')
+    </div>
+
+    <!-- Bootstrap JS and dependencies (jQuery and Popper.js) -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
+
 </html>

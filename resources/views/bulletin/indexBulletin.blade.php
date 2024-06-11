@@ -1,67 +1,47 @@
+@extends('layouts.main-layout')
 
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    @extends('layouts.main-layout')
-    
-    @section('content')
-    <title>Index Bulletin</title>
-    <!-- Bootstrap CSS -->
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <style>
-        .sidebar {
-            height: 100%;
-            width: 200px;
-            position: fixed;
-            top: 0;
-            left: 0;
-            background-color: #004d00;
-            /* Dark green color */
-            padding-top: 20px;
-        }
-
-        .sidebar a {
-            padding: 10px 15px;
-            text-decoration: none;
-            font-size: 18px;
-            color: white;
-            display: block;
-        }
-
-        .sidebar a:hover {
-            color: #f1f1f1;
-        }
-
-        .content {
-            margin-left: 220px;
-            /* Same as the width of the sidebar */
-            padding: 20px;
-        }
-    </style>
-</head>
-
-<body>
-
-    <div class="sidebar">
-        <a href="{{ route('home') }}">Home</a>
-        <a href="{{ route('profile.index') }}">Students Profile</a>
-        <a href="{{ route('activities.index') }}">KAFA activities</a>
-        <a href="{{ route('results.index') }}">Students Result</a>
-        <a href="{{ route('bulletin.index') }}">KAFA Bulletin</a>
+@section('content')
+<div class="row mb-4">
+    <div class="col-lg-12">
+        <div class="d-flex justify-content-between align-items-center">
+            <h2>List Of Bulletin</h2>
+        </div>
     </div>
+</div>
 
-    <div class="content">
-        @yield('content')
-        index Bulletin
+<div class="row mb-4">
+    <div class="col-lg-12">
+        <form action="{{ route('bulletin.indexBulletin') }}" method="GET" class="form-inline">
+            <div class="form-group mx-sm-3 mb-2">
+                <label for="category" class="mr-2">Filter by Category:</label>
+                <select name="category" id="category" class="form-control">
+                    <option value="all" {{ $category == 'all' ? 'selected' : '' }}>All</option>
+                    <option value="events" {{ $category == 'events' ? 'selected' : '' }}>Events</option>
+                    <option value="announcement" {{ $category == 'announcement' ? 'selected' : '' }}>Announcement</option>
+                    <option value="news" {{ $category == 'news' ? 'selected' : '' }}>News</option>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary mb-2">Filter</button>
+        </form>
     </div>
+</div>
 
-    <!-- Bootstrap JS and dependencies (jQuery and Popper.js) -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-</body>
-
-</html>
+<div class="row">
+    @foreach ($bulletins as $bulletin)
+        <div class="col-md-4 d-flex align-items-stretch">
+            <div class="card mb-4">
+                <img src="{{ asset('images/' . $bulletin->bulletin_image) }}" class="card-img-top"
+                    alt="{{ $bulletin->bulletin_title }}">
+                <div class="card-body d-flex flex-column">
+                    <h5 class="card-title">{{ $bulletin->bulletin_title }}</h5>
+                    <p class="card-text">{{ Str::limit($bulletin->bulletin_desc, 150) }}</p>
+                    <p class="card-text"><small class="text-muted">Category: {{ ucfirst($bulletin->bulletin_category)
+                            }}</small></p>
+                    <p class="card-text"><small class="text-muted">Created at: {{ $bulletin->created_at->format('d M Y,
+                            H:i') }}</small></p>
+                </div>
+            </div>
+        </div>
+    @endforeach
+</div>
+@endsection
