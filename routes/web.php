@@ -3,11 +3,11 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ResultController;
 use App\Http\Controllers\BulletinController;
-
+use App\Http\Controllers\profileController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\ActivityController;
 
-use App\Http\Controllers\profileController;
+
 
 
 Route::get('/', function () {
@@ -31,8 +31,6 @@ Route::delete('/bulletin/admin/delete/{id}', [BulletinController::class, 'destro
 // Route::get('/bulletin/admin/edit', [BulletinController::class, 'edit'])->name('bulletin.updateBulletin');
 // Route::get('/bulletin/admin/delete', [BulletinController::class, 'delete'])->name('bulletin.deleteBulletin');
 //asing kan ye
-Route::get('profile', [StudentController::class, 'index'])->name('profile.index');
-
 
 Route::get('/profile', [profileController::class, 'index'])->name('profile.index');
 Route::get('/profile/create',[profileController::class, 'create'])->name('profile.create');

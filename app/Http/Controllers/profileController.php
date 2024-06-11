@@ -32,10 +32,10 @@ class profileController extends Controller
         $profileDetails->parent_name =  $request->input('parent_name');
         $profileDetails->contact_no =  $request->input('contact_no');
     
-        $profileDetails->save();
+        $profileDetails->submit();
       
 
-        return redirect(route('profile.update'));
+        return redirect(route('profile.view'));
     }
 
     public function edit(profileDetail $profileDetails){
