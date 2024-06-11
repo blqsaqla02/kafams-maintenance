@@ -1,11 +1,13 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\ResultController;
 use App\Http\Controllers\BulletinController;
 use App\Http\Controllers\profileController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\ActivityController;
+use App\Http\Controllers\HomeController;
 
 
 
@@ -16,7 +18,11 @@ Route::get('/', function () {
 
 Auth::routes();
 //home
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', [HomeController::class, 'index'])->name('home');
+Route::get('/home/admin', [HomeController::class, 'index'])->name('home.admin');
+Route::get('/home/student', [HomeController::class, 'index'])->name('home.student');
+Route::get('/home/parent', [HomeController::class, 'index'])->name('home.parent');
 //result
 Route::resource('results', ResultController::class);
 
