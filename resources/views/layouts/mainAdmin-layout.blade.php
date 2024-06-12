@@ -107,7 +107,7 @@
     <div class="sidebar">
         <h2>KAFAMS ADMIN</h2>
         <a href="{{ route('home.admin') }}" class="{{ Request::routeIs('home.admin') ? 'active' : '' }}">Home</a>
-        <a href="{{ route('profile.update') }}" class="{{ Request::routeIs('profile.update') ? 'active' : '' }}">Students
+        <a href="{{ route('profile.index') }}" class="{{ Request::routeIs('profile.index') ? 'active' : '' }}">Students
             Profile</a>
         <a href="{{ route('activities.index') }}"
             class="{{ Request::routeIs('activities.index') ? 'active' : '' }}">KAFA Activities</a>

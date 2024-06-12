@@ -39,7 +39,7 @@
                                         <!-- View Button -->
                                         <a href="{{}}" class="btn btn-primary"><i class="fa fa-eye"></i> View</a>
                                             <!-- Delete Button-->
-                                            <form method="post" action="" style="display: inline;">
+                                            <form method="post" action="route('profile.destroy', $profiles->id)" style="display: inline;">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button class="btn btn-danger" type="delete"><i class="fa fa-trash">Delete</i></button>

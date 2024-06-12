@@ -38,16 +38,17 @@ Route::delete('/bulletin/admin/delete/{id}', [BulletinController::class, 'destro
 // Route::get('/bulletin/admin/delete', [BulletinController::class, 'delete'])->name('bulletin.deleteBulletin');
 //asing kan ye
 
-Route::get('/profile', [profileController::class, 'index'])->name('profile.update');
+//profile
+Route::get('/profile', [profileController::class, 'index'])->name('profile.index');
 Route::get('/profile/index2', [profileController::class, 'index2'])->name('profile.index2');
-//Route::get('/profile/index2/{id}', [ProfileController::class, 'index2'])->name('profile.index2');
 Route::get('/profile/create',[profileController::class, 'create'])->name('profile.create');
-// Route::get('/create',[profileController::class, 'create'])->name('profile.create');
 Route::get('/profile/view/{id}', [profileController::class, 'view'])->name('profile.view');
-// Route::get('/profile/edit', [profileController::class, 'edit'])->name('profile.edit');
 Route::get('/profile/edit/{id}', [profileController::class, 'edit'])->name('profile.edit');
 Route::post('/store',[profileController::class, 'store'])->name('profile.store');
+Route::delete('/profile/delete/{id}', [profileController::class, 'destroy'])->name('profile.destroy');
 // Route::post('/profile/update/{id}', [profileController::class, 'update'])->name('profile.update');
-Route::delete('/profile/{id}', [profileController::class, 'destroy'])->name('profile.destroy');
+// Route::get('/profile/edit', [profileController::class, 'edit'])->name('profile.edit');
+//Route::get('/profile/index2/{id}', [ProfileController::class, 'index2'])->name('profile.index2')
+// Route::get('/create',[profileController::class, 'create'])->name('profile.create');;
 
 Route::get('kafa-activities', [ActivityController::class, 'index'])->name('activities.index');

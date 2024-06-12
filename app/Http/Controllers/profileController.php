@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
+use Illuminate\Support\Facades\Auth;
+
 
 use App\Models\profile;
 use Illuminate\Http\RedirectResponse;
@@ -17,17 +19,38 @@ class profileController extends Controller
         return view('profile.update', ['profiles' => $profiles]);
     }
 
-    public function index2($id)
-{
-    $profile = Profile::find($id); // Fetch a single profile from the database
-    return view('profile.view', ['profile' => $profile]);
-}
+     public function index2()
+     {
+         $userId = Auth::id(); // Get the authenticated user's ID
+         if (!$userId) {
+             return redirect()->route('login'); // Redirect to login if the user is not authenticated
+         }
 
+        $profile = Profile::find($userId); // Fetch a single profile by user ID
+        if (!$profile) {
+            return redirect()->route('profile.create'); // Redirect to create profile if none exists
+        }
 
-    public function view()
-    {
-        return view('profile.view');
+        return view('profile.view', ['profile' => $profile]);
     }
+
+    // public function index2($id)
+    // {
+    //          $profile = Profile::find($id); // Fetch a single profile from the database
+    //               return view('profile.view', ['profile' => $profile]);
+    //             }
+
+                public function view($id)
+                {
+                    $profile = Profile::find($id); // Fetch the profile with the given ID
+                
+                    return view('profile.view', compact('profile'));
+                }
+                
+    // public function view()
+    // {
+    //     return view('profile.view', compact('profile'));
+    // }
 
     public function create(){
         return view('profile.create');
@@ -44,23 +67,24 @@ class profileController extends Controller
             ]);            
         // dd($request);
             
-        // $profileDetails = profileDetail::create($request->all());
-        $profileDetails = new profile();
-        $profileDetails->student_name = $request -> input('student_name');
-        $profileDetails->gender = $request->input('gender');
-        $profileDetails->address =  $request->input('address');
-        $profileDetails->parent_name =  $request->input('parent_name');
-        $profileDetails->contact_no =  $request->input('contact_no');
+        // $profile = profile::create($request->all());
+        $profiles = new profile();
+        $profiles->student_name = $request -> input('student_name');
+        $profiles->gender = $request->input('gender');
+        $profiles->address =  $request->input('address');
+        $profiles->parent_name =  $request->input('parent_name');
+        $profiles->contact_no =  $request->input('contact_no');
     
-        $profileDetails->save();
+        $profiles->save();
       
+        return redirect(route('profile.view', ['id' => $profiles->id]));
 
-        return redirect(route('profile.view'));
+        // return redirect(route('profile.view'));
     }
 
         public function edit($id) // Add the parameter to fetch the profile by ID
     {
-        $profile = Profile::findOrFail($id);
+        $profile = profile::findOrFail($id);
         return view('profile.edit', ['profile' => $profile]);
     }
     
@@ -74,8 +98,8 @@ class profileController extends Controller
    
     public function destroy($id)
 {
-    $profile = Profile::findOrFail($id);
-    $profile->delete();
+    $profiles = profile::findOrFail($id);
+    $profiles->delete();
     return redirect()->route('profile.update')->with('success', 'Profile deleted successfully.');
 }
 
