@@ -14,30 +14,39 @@
                                 <thead>
                                     <tr>
                                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                            Lab Name </th>
+                                            Student Name </th>
                                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
-                                            Asset Name </th>
+                                            Gender </th>
                                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                            Asset Status </th>
+                                            Address </th>
                                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                            Quantity </th>
+                                            Parent's Name </th>
+                                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                            Contact No </th>
                                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                             Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                            <!-- Edit Button
-                                            <a> <button class="btn btn-primary" type="edit "><i class="fa fa-pencil-square-o"></i></button></a>
--->
-                        
+                                @foreach($profiles as $profiles)
+                                    <tr>
+                                    <td scope="row" class="text-center text-dark">{{ $profiles->student_name }}</td>
+                                    <td scope="row" class="text-center text-dark">{{ $profiles->gender }}</td>
+                                    <td scope="row" class="text-center text-dark">{{ $profiles->address }}</td>
+                                    <td scope="row" class="text-dark">{{ $profiles->parent_name }}</td>
+                                    <td scope="row" class="text-dark">{{ $profiles->contact_no }}</td>
+                                        <td>
+                                        <!-- View Button -->
+                                        <a href="{{}}" class="btn btn-primary"><i class="fa fa-eye"></i> View</a>
                                             <!-- Delete Button-->
                                             <form method="post" action="" style="display: inline;">
                                                 @csrf
                                                 @method('DELETE')
-                                                <button class="btn btn-danger" type="delete"><i class="fa fa-trash"></i></button>
+                                                <button class="btn btn-danger" type="delete"><i class="fa fa-trash">Delete</i></button>
                                             </form>
                                         </td>
                                     </tr>
+                                    @endforeach
                                 </tbody>
                             </table>
                         </div>

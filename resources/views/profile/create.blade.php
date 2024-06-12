@@ -26,12 +26,12 @@
                                 </div>
                             </div>
                             <div style="margin-bottom: 15px; margin-left: 50px">
-                                <label style="display: block; margin-bottom: 5px;">Parent's Name</label>
-                            <input type="text" name="parent_name" placeholder="Parent's Name" style="width: 80%; padding: 4px;" />
+                                <label style="display: block; margin-bottom: 5px;">Address</label>
+                            <input type="text" name="address" placeholder="Address" style="width: 80%; padding: 4px;" />
                             </div>
                             <div style="margin-bottom: 15px; margin-left: 50px">
                                 <label style="display: block; margin-bottom: 5px;">Parent's Name</label>
-                            <input type="text" name="address" placeholder="Parent's Name" style="width: 80%; padding: 4px;" />
+                            <input type="text" name="parent_name" placeholder="Parent's Name" style="width: 80%; padding: 4px;" />
                             </div>
                             <div style="margin-bottom: 15px; margin-left: 50px">
                                 <label style="display: block; margin-bottom: 5px;">Contact No</label>

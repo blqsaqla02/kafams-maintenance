@@ -3,14 +3,27 @@
 namespace App\Http\Controllers;
 
 use App\Models\profile;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+use Illuminate\View\View;
 
 class profileController extends Controller
 {
+
+
     public function index(){
-            $profiles = profile::all();//fetch all records from profile Model
-            return view('profile.view', ['profiles' => $profiles]);
-        }
+        $profiles = profile::all();//fetch all records from profile Model
+        return view('profile.update', ['profiles' => $profiles]);
+    }
+
+    public function index2($id)
+{
+    $profile = Profile::find($id); // Fetch a single profile from the database
+    return view('profile.view', ['profile' => $profile]);
+}
+
+
     public function view()
     {
         return view('profile.view');
@@ -45,18 +58,25 @@ class profileController extends Controller
         return redirect(route('profile.view'));
     }
 
-    public function edit(profile $profileDetails){
-
-        $profiles = profile::find($profileDetails->id);
-
-        return view('profile.view', ['profileDetail' => $profiles]);
-    }
-
-    public function destroy(profile $profileDetails)
+        public function edit($id) // Add the parameter to fetch the profile by ID
     {
-         $profileDetails->delete();
-
-    return redirect()->route('profile.update');
+        $profile = Profile::findOrFail($id);
+        return view('profile.edit', ['profile' => $profile]);
     }
+    
+
+    // public function destroy(profile $profile)
+    // {
+    //      $profile->delete();
+
+    // return redirect()->route('profile.update');
+    // }
    
+    public function destroy($id)
+{
+    $profile = Profile::findOrFail($id);
+    $profile->delete();
+    return redirect()->route('profile.update')->with('success', 'Profile deleted successfully.');
+}
+
 }
