@@ -46,6 +46,14 @@ class profileController extends Controller
                 
                     return view('profile.view', compact('profile'));
                 }
+
+                public function show($id)
+                {
+                    $profile = Profile::find($id); // Fetch the profile with the given ID
+                
+                    return view('profile.show', compact('profile'));
+                }
+                
                 
     // public function view()
     // {
@@ -100,7 +108,7 @@ class profileController extends Controller
 {
     $profiles = profile::findOrFail($id);
     $profiles->delete();
-    return redirect()->route('profile.update')->with('success', 'Profile deleted successfully.');
+    return redirect()->route('profile.index')->with('success', 'Profile deleted successfully.');
 }
 
 }
