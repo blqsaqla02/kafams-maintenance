@@ -53,7 +53,7 @@
                     <input type="file" name="bulletin_image" class="custom-file-input" id="customFile">
                     <label class="custom-file-label" for="customFile">Choose file</label>
                 </div>
-                <img style="margin-top:10px; width:auto; border-radius:10px;" src="{{ asset('images/' . $bulletin->bulletin_image) }}" width="100" alt="{{ $bulletin->bulletin_title }}">
+                <img style="margin-top:10px; width:150px; border-radius:10px;" src="{{ asset('images/' . $bulletin->bulletin_image) }}" width="100" alt="{{ $bulletin->bulletin_title }}">
             </div>
             <div class="form-group">
                 <label for="bulletin_desc">Description:</label>
