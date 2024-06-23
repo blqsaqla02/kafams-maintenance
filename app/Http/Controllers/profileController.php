@@ -23,12 +23,12 @@ class profileController extends Controller
      {
          $userId = Auth::id(); // Get the authenticated user's ID
          if (!$userId) {
-             return redirect()->route('login'); // Redirect to login if the user is not authenticated
+             return redirect()->route('register'); // Redirect to register if the user is not authenticated
          }
 
         $profile = Profile::find($userId); // Fetch a single profile by user ID
         if (!$profile) {
-            return redirect()->route('profile.create'); // Redirect to create profile if none exists
+            return redirect()->route('profile.create'); // Redirect to create profile if none exists                   
         }
 
         return view('profile.view', ['profile' => $profile]);
@@ -103,7 +103,8 @@ class profileController extends Controller
 
     // return redirect()->route('profile.update');
     // }
-   
+    
+   //delete a profile
     public function destroy($id)
 {
     $profiles = profile::findOrFail($id);
