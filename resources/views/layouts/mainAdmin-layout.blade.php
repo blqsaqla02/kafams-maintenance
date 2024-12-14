@@ -109,8 +109,8 @@
         <a href="{{ route('home.admin') }}" class="{{ Request::routeIs('home.admin') ? 'active' : '' }}">Home</a>
         <a href="{{ route('profile.index') }}" class="{{ Request::routeIs('profile.index') ? 'active' : '' }}">Students
             Profile</a>
-        <a href="{{ route('activities.index') }}"
-            class="{{ Request::routeIs('activities.index') ? 'active' : '' }}">KAFA Activities</a>
+        <a href="{{ route('activities.main') }}"
+            class="{{ Request::routeIs('activities.main') ? 'active' : '' }}">KAFA Activities</a>
         <a href="{{ route('results.index') }}" class="{{ Request::routeIs('results.index') ? 'active' : '' }}">Students
             Results</a>
         <a href="{{ route('bulletin.indexBulletinAdmin') }}"

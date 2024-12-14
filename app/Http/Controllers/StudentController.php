@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\studentModel;
+use App\Models\Student;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;

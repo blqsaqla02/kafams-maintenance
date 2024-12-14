@@ -53,4 +53,17 @@ Route::delete('/profile/delete/{id}', [profileController::class, 'destroy'])->na
 //Route::get('/profile/index2/{id}', [ProfileController::class, 'index2'])->name('profile.index2')
 // Route::get('/create',[profileController::class, 'create'])->name('profile.create');;
 
-Route::get('kafa-activities', [ActivityController::class, 'index'])->name('activities.index');
+
+//Past KAFA activities
+// Route::get('kafa-activities', [ActivityController::class, 'index'])->name('activities.index');
+
+//New KAFA activities
+Route::prefix('/kafa-activities')->group(function() {
+    Route::get('/', [ActivityController::class, 'index'])->name('activities.main');
+    Route::get('/{item}', [ActivityController::class, 'view'])->name('activity.viewActivity');
+    Route::get('/add/{item}', [ActivityController::class, 'addform'])->name('activity.addActivity');
+    Route::post('/add/{item}/submit', [ActivityController::class, 'submitform'])->name('activity.submit');
+    Route::get('/edit/{item}/{id}', [ActivityController::class, 'edit'])->name('activity.editActivity');
+    Route::post('/edit/{item}/{id}/update', [ActivityController::class, 'updateForm'])->name('activity.updateActivity');
+    Route::delete('/delete/{item}/{id}', [ActivityController::class, 'destroy'])->name('activity.deleteActivity');
+})->middleware('auth');
