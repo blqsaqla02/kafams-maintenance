@@ -3,12 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Activity;
-use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
-use Illuminate\View\View;
 use Illuminate\Support\Str;
 
 
@@ -29,27 +26,45 @@ class ActivityController extends Controller
 
     //View Activity
 
-    public function view($item)
+    public function view($type)
     {
 
         $activities = Activity::all()
-                    ->where('activityType', '=', $item);
+                    ->where('activityType', '=', $type);
 
         // dd($activities);
 
-        return view('activity.viewActivity', compact('item'), compact('activities'));
+        return view('activity.viewActivity', [
+            'type' => $type, 
+            'activities' => $activities
+        ]);
+    }
+
+    public function viewActivity($item, Activity $activity)
+    {
+        $fetch = Activity::find($activity->id);
+        
+        $levels = [1, 2, 3, 4, 5];
+
+        $activityFile = Str::after($activity->file_path, '_');
+
+        return view('activity.viewActivityFile', [
+            'activity' => $fetch,
+            'activityFile' => $activityFile,
+            'levels' => $levels
+        ]);
     }
 
     //Display add form
 
-    public function addform($item)
+    public function addform($type)
     {
-        return view('activity.addActivity', compact('item'));
+        return view('activity.addActivity', ['type' => $type]);
     }
 
 
     //Add activity form
-    public function submitForm(Request $request, $item)
+    public function submitForm(Request $request, $type)
     {
         $request -> validate([
             'title' => 'required',
@@ -66,7 +81,7 @@ class ActivityController extends Controller
 
             $filename = time().'_'.$request->file('file')->getClientOriginalName();
             $filePath = $request->file('file')->storeAs('uploads', $filename, 'public');
-            $activity->activityType = $item;
+            $activity->activityType = $type;
             $activity->activityTitle = $request->title;
             $activity->activitySubject = $request->subject;
             $activity->activityLevel = $request->level;
@@ -74,31 +89,30 @@ class ActivityController extends Controller
 
             $activity->save();
 
-            return Redirect::route('activity.viewActivity', compact('item'))
+            return Redirect::route('activity.viewActivity', ['type' => $type])
                     ->with('success', 'File had been uploaded successfully!');
         }
     }
 
     
-    public function edit($item, $id)
+    public function edit($type, Activity $activity)
     {
         // dd($item);
 
-        $activity = Activity::find($id);
+        $fetch = Activity::find($activity->id);
         
         $levels = [1, 2, 3, 4, 5];
 
         $activityFile = Str::after($activity->file_path, '_');
 
-        return view('activity.editActivity', compact('activity', 'item', 'activityFile', 'levels'));
+        return view('activity.editActivity', [
+            'activity' => $fetch,
+            'activityFile' => $activityFile,
+            'levels' => $levels
+        ]);
     }
-
-
-    public function delete()
-    {
-        return 0;
-    }
-    public function updateForm(Request $request, $item, $id)
+    
+    public function updateForm(Request $request, $type, Activity $activity)
     {
         $request -> validate([
             'title' => 'required',
@@ -107,23 +121,23 @@ class ActivityController extends Controller
             'file' => 'mimes:csv,txt,pdf|max:2048'
         ]);
 
-        $activity = Activity::find($id);
+        $find_activity = Activity::find($activity->id);
 
         if($request->file())
         {
             $filename = time().'_'.$request->file('file')->getClientOriginalName();
             $filePath = $request->file('file')->storeAs('uploads', $filename, 'public');
-            $activity->activityType = $item;
-            $activity->activityTitle = $request->title;
-            $activity->activitySubject = $request->subject;
-            $activity->activityLevel = $request->level;
-            $activity->file_path = '/storage/' . $filePath;
+            $find_activity->activityType = $activity->activityType;
+            $find_activity->activityTitle = $request->title;
+            $find_activity->activitySubject = $request->subject;
+            $find_activity->activityLevel = $request->level;
+            $find_activity->file_path = '/storage/' . $filePath;
 
-            $activity->save();
+            $find_activity->save();
 
             //Reemind to add functions to delete file in storage
 
-            return Redirect::route('activity.viewActivity', compact('item'))
+            return redirect()->route('activity.viewActivity', compact('item'))
                     ->with('success', 'File had been uploaded successfully!');
 
         }
@@ -132,25 +146,27 @@ class ActivityController extends Controller
             //Remind to add the functions to enable edits without need to upload file
             //Means fix thiss
 
-            $activity->activityType = $item;
-            $activity->activityTitle = $request->title;
-            $activity->activitySubject = $request->subject;
-            $activity->activityLevel = $request->level;
+            $find_activity->activityType = $activity->activityType;
+            $find_activity->activityTitle = $request->title;
+            $find_activity->activitySubject = $request->subject;
+            $find_activity->activityLevel = $request->level;
 
-            $activity->save();
+            $find_activity->save();
 
-            return Redirect::route('activity.viewActivity', compact('item'))
+            return redirect()->route('activity.viewActivity', ['type' => $find_activity->activityType])
             ->with('success', 'File had been uploaded successfully!');
         }
     }
 
     // Destroy the file
 
-    public function destroy($item, $id)
+    public function destroy($type, Activity $activity)
     {
-        $activity = Activity::where('id', $id)->firstorfail()->delete();
-        return Redirect::route('activity.viewActivity', compact('item'))
-                    ->with('success', 'File had been uploaded successfully!');
+        $delete = Activity::where('id', $activity->id)->firstorfail()->delete();
+        return redirect()->route('activity.viewActivity', [
+            'type' => $type
+        ])
+        ->with('success', 'File had been uploaded successfully!');
     }
     
 }

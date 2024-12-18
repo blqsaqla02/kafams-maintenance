@@ -19,7 +19,7 @@
     </div>
     <div class="row mb-4">
         <div class="col-lg-12">
-            <h3>Activity > {{$item}} Section</h3>
+            <h3>Activity > {{$type}} Section</h3>
         </div>
     </div>
 
@@ -45,9 +45,9 @@
                                 @if ($activity->activityLevel < 4)
                                     <h4>{{ $activity->activityTitle }}</h4>
                                     
-                                    <form class="form" method="POST" action="{{route('activity.deleteActivity', ['item' => $item, 'id' => $activity->id])}}">
-                                        <a class="btn btn-primary" href="#">View file</a>
-                                        <a class="btn btn-primary" href="{{ route('activity.editActivity', ['item' => $item, 'id' => $activity->id])}}">Edit</a>
+                                    <form class="form" method="POST" action="{{route('activity.deleteActivity', ['type' => $activity->activityType, 'activity' => $activity])}}">
+                                        <a class="btn btn-primary" href="{{ route('activity.viewActivityFile', ['type' => $activity->activityType, 'activity' => $activity]) }}">View file</a>
+                                        <a class="btn btn-primary" href="{{ route('activity.editActivity', ['type' => $activity->activityType, 'activity' => $activity])}}">Edit</a>
                                         @csrf
                                         @method('DELETE')
                                         <button class="btn btn-danger" type="submit">Delete</button>
@@ -57,9 +57,9 @@
                             <td>
                                 @if ($activity->activityLevel > 3)
                                     <h4>{{ $activity->activityTitle }}</h4>
-                                    <form class="form" method="POST" action="{{route('activity.deleteActivity', ['item' => $item, 'id' => $activity->id])}}">
-                                        <a class="btn btn-primary" href="#">View file</a>
-                                        <a class="btn btn-primary" href="{{ route('activity.editActivity', ['item' => $item, 'id' => $activity->id])}}">Edit</a>
+                                    <form class="form" method="POST" action="{{route('activity.deleteActivity', ['type' => $activity->activityType,'activity' => $activity])}}">
+                                        <a class="btn btn-primary" href="{{ route('activity.viewActivityFile', ['type' => $activity->activityType, 'activity' => $activity]) }}">View file</a>
+                                        <a class="btn btn-primary" href="{{ route('activity.editActivity', ['type' => $activity->activityType, 'activity' => $activity])}}">Edit</a>
                                         @csrf
                                         @method('DELETE')
                                         <button class="btn btn-danger" type="submit">Delete</button>
@@ -81,7 +81,7 @@
 
     <div class="row mb-4">
         <div class="col-lg-12">
-            <a class="btn btn-primary" href="{{route('activity.addActivity', $item)}}">Add {{$item}}</a>
+            <a class="btn btn-primary" href="{{route('activity.addActivity', $type)}}">Add {{$type}}</a>
         </div>
     </div>
 

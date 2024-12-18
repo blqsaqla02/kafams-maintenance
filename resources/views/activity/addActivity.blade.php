@@ -19,11 +19,11 @@
     </div>
     <div class="row mb-4">
         <div class="col-lg-12">
-            <h3>Activity > {{$item}} Section</h3>
+            <h3>Activity > {{$type}} Section</h3>
         </div>
     </div>
 
-    <form class="form" action="{{ route('activity.submit', $item) }}" method="POST" enctype="multipart/form-data">
+    <form class="form" action="{{ route('activity.submit', ['type' => $type]) }}" method="POST" enctype="multipart/form-data">
         @csrf
         <div class="row mb-4 form form-group">
             <label class="form form-label">Title</label>
@@ -51,7 +51,7 @@
         
         <div class="row mb-4">
             <div class="col-lg-12">
-                <button class="btn btn-primary" type="submit">Add {{$item}}</button>
+                <button class="btn btn-primary" type="submit">Add {{$type}}</button>
             </div>
         </div>
     </form>
