@@ -5,22 +5,31 @@ namespace App\Http\Controllers;
 use App\Models\Result;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 use Illuminate\View\View;
   
 class ResultController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Display a listing of the resource with search functionality.
      */
-    public function index(): View
+    public function index(Request $request): View
     {
-        $results = Result::latest()->paginate(5);
-        
-        return view('results.index',compact('results'))
-                    ->with('i', (request()->input('page', 1) - 1) * 5);
+        $search = $request->query('search');
+
+        // If there's a search query, filter results
+        if ($search) {
+            $results = Result::where('student_name', 'like', '%' . $search . '%')
+                             ->orWhere('student_class', 'like', '%' . $search . '%')
+                             ->paginate(5);
+        } else {
+            // Default behavior: show all results
+            $results = Result::latest()->paginate(5);
+        }
+
+        return view('results.index', compact('results'))
+            ->with('i', (request()->input('page', 1) - 1) * 5);
     }
-  
+
     /**
      * Show the form for creating a new resource.
      */
@@ -44,7 +53,7 @@ class ResultController extends Controller
         Result::create($request->all());
          
         return redirect()->route('results.index')
-                        ->with('success','Result created successfully.');
+                        ->with('success', 'Result created successfully.');
     }
   
     /**
@@ -52,7 +61,7 @@ class ResultController extends Controller
      */
     public function show(Result $result): View
     {
-        return view('results.show',compact('result'));
+        return view('results.show', compact('result'));
     }
   
     /**
@@ -60,7 +69,7 @@ class ResultController extends Controller
      */
     public function edit(Result $result): View
     {
-        return view('results.edit',compact('result'));
+        return view('results.edit', compact('result'));
     }
   
     /**
@@ -78,7 +87,7 @@ class ResultController extends Controller
         $result->update($request->all());
         
         return redirect()->route('results.index')
-                        ->with('success','Result updated successfully');
+                        ->with('success', 'Result updated successfully.');
     }
   
     /**
@@ -89,6 +98,8 @@ class ResultController extends Controller
         $result->delete();
          
         return redirect()->route('results.index')
-                        ->with('success','Result deleted successfully');
+                        ->with('success', 'Result deleted successfully.');
     }
 }
+
+
