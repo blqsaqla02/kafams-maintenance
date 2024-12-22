@@ -50,6 +50,7 @@
     <div class="row mb-4 form form-group">
         <label class="form form-labeel">Current File: </label>
         <input class="form form-control" name="prevFile" type="text" value="{{$activityFile}}" readonly>
+        <embed src="{{ asset($activity->file_path) }}" width="1000" height="500" alt="pdf" />
     </div>
     
     <div class="row mb-4">
