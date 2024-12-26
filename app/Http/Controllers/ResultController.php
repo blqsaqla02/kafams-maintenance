@@ -18,12 +18,12 @@ class ResultController extends Controller
 
         // If there's a search query, filter results
         if ($search) {
-            $result = Result::where('student_name', 'like', '%' . $search . '%')
+            $results = Result::where('student_name', 'like', '%' . $search . '%')
                              ->orWhere('student_class', 'like', '%' . $search . '%')
                              ->paginate(5);
         } else {
             // Default behavior: show all results
-            $result = Result::latest()->paginate(5);
+            $results = Result::latest()->paginate(5);
         }
 
         return view('results.index', compact('results'))
