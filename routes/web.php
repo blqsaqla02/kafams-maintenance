@@ -57,6 +57,7 @@ Route::delete('/profile/delete/{id}', [profileController::class, 'destroy'])->na
 //Past KAFA activities
 // Route::get('kafa-activities', [ActivityController::class, 'index'])->name('activities.index');
 
+
 //New KAFA activities
 Route::prefix('/kafa-activities')->group(function() {
     Route::get('/', [ActivityController::class, 'index'])->name('activities.main');
