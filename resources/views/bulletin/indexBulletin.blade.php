@@ -27,7 +27,12 @@
 </div>
 
 <div class="row">
-    @foreach ($bulletins as $bulletin)
+    @if ($bulletins->isEmpty())
+        <div class="col-12">
+            <p>No results available for this category.</p>
+        </div>
+    @else
+        @foreach ($bulletins as $bulletin)
         <div class="col-md-4 d-flex align-items-stretch">
             <div class="card mb-4">
                 <img src="{{ asset('images/' . $bulletin->bulletin_image) }}" class="card-img-top"
@@ -35,13 +40,12 @@
                 <div class="card-body d-flex flex-column">
                     <h5 class="card-title">{{ $bulletin->bulletin_title }}</h5>
                     <p class="card-text">{{ Str::limit($bulletin->bulletin_desc, 150) }}</p>
-                    <p class="card-text"><small class="text-muted">Category: {{ ucfirst($bulletin->bulletin_category)
-                            }}</small></p>
-                    <p class="card-text"><small class="text-muted">Created at: {{ $bulletin->created_at->format('d M Y,
-                            H:i') }}</small></p>
+                    <p class="card-text"><small class="text-muted">Category: {{ ucfirst($bulletin->bulletin_category) }}</small></p>
+                    <p class="card-text"><small class="text-muted">Created at: {{ $bulletin->created_at->format('d M Y, H:i') }}</small></p>
                 </div>
             </div>
         </div>
-    @endforeach
+        @endforeach
+    @endif
 </div>
 @endsection
