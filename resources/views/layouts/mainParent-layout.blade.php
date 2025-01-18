@@ -112,6 +112,7 @@
             Results</a>
         <a href="{{ route('bulletin.indexBulletin') }}"
             class="{{ Request::routeIs('bulletin.indexBulletin') ? 'active' : '' }}">KAFA Bulletin</a>
+        <a href="{{ route('profile.parent') }}" class="{{ Request::routeIs('profile.parent') ? 'active' : '' }}">Your Profile</a>
     </div>
 
     <div class="content">

@@ -10,8 +10,6 @@ use App\Http\Controllers\ActivityController;
 use App\Http\Controllers\HomeController;
 
 
-
-
 Route::get('/', function () {
     return view('welcome');
 });
@@ -69,3 +67,20 @@ Route::prefix('/kafa-activities')->group(function() {
     Route::post('/edit/{type}/{activity}/update', [ActivityController::class, 'updateForm'])->name('activity.updateActivity');
     Route::delete('/delete/{type}/{activity}', [ActivityController::class, 'destroy'])->name('activity.deleteActivity');
 })->middleware('auth');
+
+
+use App\Http\Controllers\Auth\ForgotPasswordController;
+Route::get('/password/reset', [ForgotPasswordController::class, 'showResetForm'])->name('password.request');
+Route::post('/password/reset', [ForgotPasswordController::class, 'resetPassword'])->name('password.update');
+
+use App\Http\Controllers\AdminProfileController;
+Route::middleware('auth')->group(function () {
+    Route::get('/admin/profile', [AdminProfileController::class, 'index'])->name('profile.admin');
+    Route::post('/admin/profile', [AdminProfileController::class, 'update']);
+});
+
+use App\Http\Controllers\ParentProfileController;
+Route::middleware('auth')->group(function () {
+    Route::get('/parent/profile', [ParentProfileController::class, 'index'])->name('profile.parent');
+    Route::post('/parent/profile', [ParentProfileController::class, 'update']);
+});
